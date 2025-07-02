@@ -93,6 +93,7 @@ def profiles():
         return redirect('/login')
     conn = get_db()
     cursor = conn.cursor()
+    # Показати всіх, хто має visible=1
     cursor.execute("SELECT username, name, avatar, is_verified FROM users WHERE visible = 1")
     users = cursor.fetchall()
     conn.close()
@@ -232,6 +233,5 @@ def chat_with(username):
 
     return render_template('private_chat.html', messages=messages, receiver=username)
 
-# 👉 РОБОЧИЙ ЗАПУСК ДЛЯ RENDER
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=10000)
+    app.run(debug=True)
